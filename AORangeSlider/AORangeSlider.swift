@@ -1,6 +1,6 @@
 //
-//  RangeSlider.swift
-//  YWCRangeSlider
+//  AORangeSlider.swift
+//  AORangeSlider
 //
 //  Created by YangWeicheng on 15/05/2017.
 //  Copyright © 2017 YWC. All rights reserved.
