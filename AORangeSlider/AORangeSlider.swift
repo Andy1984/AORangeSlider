@@ -200,7 +200,7 @@ open class AORangeSlider: UIControl {
     open var trackBackgroundImage: UIImage! {
         didSet {
             self.trackBackgroundImageView.image = trackBackgroundImage
-            self.trackBackgroundImageView.frame = trackBackgroundRect()
+            
             setNeedsLayout()
         }
     }
@@ -240,7 +240,6 @@ open class AORangeSlider: UIControl {
         highMinimumValue = Double.nan
 
         trackBackgroundImageView = UIImageView()
-        //trackBackgroundImage didSet will set frame
         trackBackgroundImage = AORangeSlider.getImage(color: #colorLiteral(red: 0.7333333333, green: 0.7333333333, blue: 0.7333333333, alpha: 1), size: CGSize(width: 1, height: 2))
         addSubview(self.trackBackgroundImageView)
 
@@ -333,6 +332,8 @@ open class AORangeSlider: UIControl {
         } else {
             highHandle.frame = handleRectFor(value: highValue, size: highHandle.image!.size)
         }
+        
+        trackBackgroundImageView.frame = trackBackgroundRect()
 
         trackImageView.image = trackImageForCurrentValues()
         trackImageView.frame = trackRect()
