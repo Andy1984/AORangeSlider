@@ -380,13 +380,13 @@ open class AORangeSlider: UIControl {
     /// begin track, decide which thumb response to the action
     override open func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let touchPoint = touch.location(in: self)
-        let lowRect = UIEdgeInsetsInsetRect(lowHandle.frame, lowTouchEdgeInsets)
+        let lowRect = lowHandle.frame.inset(by: lowTouchEdgeInsets)
         if lowRect.contains(touchPoint) {
             lowHandle.isHighlighted = true
             lowTouchOffset = Double(touchPoint.x - lowHandle.center.x)
         }
 
-        let highRect = UIEdgeInsetsInsetRect(highHandle.frame, highTouchEdgeInsets)
+        let highRect = highHandle.frame.inset(by: highTouchEdgeInsets)
         if highRect.contains(touchPoint) {
             highHandle.isHighlighted = true
             highTouchOffset = Double(touchPoint.x - highHandle.center.x)
@@ -410,7 +410,7 @@ open class AORangeSlider: UIControl {
 
             if newValue < lowValue || !highHandle.isHighlighted {
                 highHandle.isHighlighted = false
-                bringSubview(toFront: lowHandle)
+                bringSubviewToFront(lowHandle)
 
                 let pointX = Double(touchPoint.x)
                 let low = lowValueForCenterX(x: pointX)
@@ -428,7 +428,7 @@ open class AORangeSlider: UIControl {
             if newValue > highValue || !lowHandle.isHighlighted {
 
                 lowHandle.isHighlighted = false
-                bringSubview(toFront: highHandle)
+                bringSubviewToFront(highHandle)
 
                 let pointX = Double(touchPoint.x.native)
                 let high = highValueForCenterX(x: pointX)
