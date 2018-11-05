@@ -2,9 +2,8 @@
 ![Screenshot gif](https://raw.githubusercontent.com/Andy1984/AORangeSlider/master/Screenshot.gif)
 
 `AORangeSlider` is a custom UISlider with two handler to pick a minimum and maximum range.
-Inspired by <https://github.com/muZZkat/NMRangeSlider>
 
-#Adding `AORangeSlider` to your project
+# Adding `AORangeSlider` to your project
 CocoaPods
 [CocoaPods](http://cocoapods.org) is the recommended way to add `AORangeSlider` to your project.
 Add the following line to your Podfile:
