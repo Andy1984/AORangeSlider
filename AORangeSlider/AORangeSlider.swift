@@ -214,7 +214,7 @@ open class AORangeSlider: UIControl {
     private var lowTouchOffset = 0.0
     private var highTouchOffset = 0.0
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
     }
