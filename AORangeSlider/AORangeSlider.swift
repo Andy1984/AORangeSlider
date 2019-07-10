@@ -14,12 +14,14 @@ open class AORangeSlider: UIControl {
     /// default 0.0
     @IBInspectable open var minimumValue:Double = 0.0 {
         didSet {
+            _lowValue = minimumValue
             setNeedsLayout()
         }
     }
     /// default 1.0
     @IBInspectable open var maximumValue:Double = 1.0 {
         didSet {
+            _highValue = maximumValue
             setNeedsLayout()
         }
     }
