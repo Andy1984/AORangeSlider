@@ -12,15 +12,31 @@ import UIKit
 open class AORangeSlider: UIControl {
 
     /// default 0.0
-    open var minimumValue = 0.0
+    @IBInspectable open var minimumValue:Double = 0.0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
     /// default 1.0
-    open var maximumValue = 1.0
-
+    @IBInspectable open var maximumValue:Double = 1.0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
     /// default 0.0, could be negative. The minimum distance between the low value and high value
-    open var minimumDistance = 0.0
-
+    @IBInspectable open var minimumDistance:Double = 0.0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
     /// default 0.0
-    open var stepValue = 0.0
+    @IBInspectable open var stepValue:Double = 0.0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
 
     /// default false. If true, the slider ball will not move until it hit a new step.
     open var stepValueContinuously = false
