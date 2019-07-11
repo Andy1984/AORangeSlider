@@ -12,15 +12,33 @@ import UIKit
 open class AORangeSlider: UIControl {
 
     /// default 0.0
-    open var minimumValue = 0.0
+    @IBInspectable open var minimumValue:Double = 0.0 {
+        didSet {
+            _lowValue = minimumValue
+            setNeedsLayout()
+        }
+    }
     /// default 1.0
-    open var maximumValue = 1.0
-
+    @IBInspectable open var maximumValue:Double = 1.0 {
+        didSet {
+            _highValue = maximumValue
+            setNeedsLayout()
+        }
+    }
+    
     /// default 0.0, could be negative. The minimum distance between the low value and high value
-    open var minimumDistance = 0.0
-
+    @IBInspectable open var minimumDistance:Double = 0.0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
     /// default 0.0
-    open var stepValue = 0.0
+    @IBInspectable open var stepValue:Double = 0.0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
 
     /// default false. If true, the slider ball will not move until it hit a new step.
     open var stepValueContinuously = false
@@ -161,11 +179,48 @@ open class AORangeSlider: UIControl {
     /// the length of default ball
     private let systemBallLength: CGFloat = 28.0
 
+    /// the color of value bar
+    @IBInspectable open var trackColor:UIColor? = #colorLiteral(red: 0, green: 0.4793452024, blue: 0.9990863204, alpha: 1) {
+        didSet {
+            setNeedsLayout()
+        }
+    }
     /// the image of value bar
-    open var trackImage = AORangeSlider.getImage(color: #colorLiteral(red: 0, green: 0.4793452024, blue: 0.9990863204, alpha: 1), size: CGSize(width: 1, height: 2))
+    @IBInspectable open var trackImage:UIImage? {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
+    /// the color of value bar when crossed
+    @IBInspectable open var trackCrossedColor:UIColor? = .red {
+        didSet {
+            setNeedsLayout()
+        }
+    }
 
     /// the image of value bar when crossed
-    open var trackCrossedImage = AORangeSlider.getImage(color: .red, size: CGSize(width: 1, height: 2))
+    @IBInspectable open var trackCrossedImage:UIImage? {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
+    /// backgroundImage of the bar, default is a gray 1x2 image
+    @IBInspectable open var trackBackgroundColor: UIColor = .gray {
+        didSet {
+            self.trackBackgroundImage = AORangeSlider.getImage(color: self.trackBackgroundColor, size: CGSize(width: 1, height: 2))
+        }
+    }
+    
+    /// backgroundImage of the bar, default is a gray 1x2 image
+    @IBInspectable open var trackBackgroundImage: UIImage! {
+        didSet {
+            self.trackBackgroundImageView.image = trackBackgroundImage
+            
+            setNeedsLayout()
+        }
+    }
 
     /// Default is nil, and use the shadow ball of system
     @IBInspectable open var lowHandleImageNormal: UIImage? {
@@ -196,14 +251,6 @@ open class AORangeSlider: UIControl {
     open var lowHandleImageHighlighted: UIImage?
     open var highHandleImageHighlighted: UIImage?
 
-    /// backgroundImage of the bar, default is a gray 1x2 image
-    open var trackBackgroundImage: UIImage! {
-        didSet {
-            self.trackBackgroundImageView.image = trackBackgroundImage
-            
-            setNeedsLayout()
-        }
-    }
     private var trackBackgroundImageView: UIImageView!
 
     /// Keep it private, given that it is useless to change its image directly
@@ -224,11 +271,24 @@ open class AORangeSlider: UIControl {
         configureViews()
     }
 
-    func trackImageForCurrentValues() -> UIImage {
+    func trackImageForCurrentValues() -> UIImage? {
         if lowValue <= highValue {
-            return trackImage
+            if trackImage != nil {
+                return trackImage
+            }else if(trackColor != nil) {
+                return AORangeSlider.getImage(color: trackColor!, size: CGSize(width: 1, height: 2))
+            }else {
+                return AORangeSlider.getImage(color: #colorLiteral(red: 0, green: 0.4793452024, blue: 0.9990863204, alpha: 1), size: CGSize(width: 1, height: 2))
+            }
         } else {
-            return trackCrossedImage
+            if trackCrossedImage != nil {
+                return trackCrossedImage
+            }else if(trackCrossedColor != nil) {
+                return AORangeSlider.getImage(color: trackCrossedColor!, size: CGSize(width: 1, height: 2))
+            }else {
+                return AORangeSlider.getImage(color: .red, size: CGSize(width: 1, height: 2))
+            }
+            
         }
     }
 
