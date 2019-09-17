@@ -9,17 +9,17 @@
 import UIKit
 
 @IBDesignable
-open class AORangeSlider: UIControl {
+@objc open class AORangeSlider: UIControl {
 
     /// default 0.0
-    @IBInspectable open var minimumValue:Double = 0.0 {
+    @objc @IBInspectable open var minimumValue:Double = 0.0 {
         didSet {
             _lowValue = minimumValue
             setNeedsLayout()
         }
     }
     /// default 1.0
-    @IBInspectable open var maximumValue:Double = 1.0 {
+    @objc @IBInspectable open var maximumValue:Double = 1.0 {
         didSet {
             _highValue = maximumValue
             setNeedsLayout()
@@ -27,52 +27,52 @@ open class AORangeSlider: UIControl {
     }
     
     /// default 0.0, could be negative. The minimum distance between the low value and high value
-    @IBInspectable open var minimumDistance:Double = 0.0 {
+    @objc @IBInspectable open var minimumDistance:Double = 0.0 {
         didSet {
             setNeedsLayout()
         }
     }
     
     /// default 0.0
-    @IBInspectable open var stepValue:Double = 0.0 {
+    @objc @IBInspectable open var stepValue:Double = 0.0 {
         didSet {
             setNeedsLayout()
         }
     }
 
     /// default false. If true, the slider ball will not move until it hit a new step.
-    open var stepValueContinuously = false
+    @objc open var stepValueContinuously = false
 
     /// stepValueInternal = stepValueContinuously ? stepValue : 0.0f;
     private var stepValueInternal = 0.0
 
     /// default true. If false, it will not trigger valueChanged until the touch ends.
-    open var changeValueContinuously = true
+    @objc open var changeValueContinuously = true
 
     /// default false, if true, it become a single thumb slider
-    open var isHighHandleHidden = false {
+    @objc open var isHighHandleHidden = false {
         didSet {
             setNeedsLayout()
         }
     }
 
     /// default false, isHighHandleHidden counterpart, should be useless
-    open var isLowHandleHidden = false {
+    @objc open var isLowHandleHidden = false {
         didSet {
             setNeedsLayout()
         }
     }
 
     /// low center point
-    open private(set) var lowCenter: CGPoint = .zero
+    @objc open private(set) var lowCenter: CGPoint = .zero
 
     /// high center point
-    open private(set) var highCenter: CGPoint = .zero
+    @objc open private(set) var highCenter: CGPoint = .zero
 
     /// default doing nothing, will call this block when lowCenter and highCenter changed
-    open var valuesChangedHandler:() -> Void = {}
+    @objc open var valuesChangedHandler:() -> Void = {}
 
-    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+    @objc open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "frame" {
             guard let handle = object as? UIImageView else {
                 return
@@ -95,7 +95,7 @@ open class AORangeSlider: UIControl {
     /// setLowValue would call layoutSubviews, must not call setLowValue in the layoutSubviews
     private var _lowValue = 0.0
     /// default 0.0, set method does not send action
-    @IBInspectable open var lowValue: Double {
+    @objc @IBInspectable open var lowValue: Double {
         set {
             var value = newValue
             if stepValueInternal > 0 {
@@ -119,7 +119,7 @@ open class AORangeSlider: UIControl {
     /// setHighValue would call layoutSubviews, must not call setHighValue in the layoutSubviews
     private var _highValue = 0.0
     /// default = maximumValue, does not send action
-    @IBInspectable open var highValue: Double {
+    @objc @IBInspectable open var highValue: Double {
         set {
             var value = newValue
             if stepValueInternal > 0 {
@@ -140,12 +140,7 @@ open class AORangeSlider: UIControl {
     }
 
     /// move slider animatedly. does not send action
-    ///
-    /// - Parameters:
-    ///   - low:
-    ///   - high:
-    ///   - animated:
-    open func setValue(low: Double, high: Double, animated: Bool) {
+    @objc open func setValue(low: Double, high: Double, animated: Bool) {
         var duration = 0.0
         if animated {
             duration = 0.25
@@ -163,15 +158,15 @@ open class AORangeSlider: UIControl {
     }
 
     ///  maximum value for left thumb, default nan
-    open var lowMaximumValue = Double.nan
+    @objc open var lowMaximumValue = Double.nan
 
     /// minimum value for right thumb, default nan
-    open var highMinimumValue = Double.nan
+    @objc open var highMinimumValue = Double.nan
 
     /// make left thumb easy to touch. Default UIEdgeInsetsMake(-5, -5, -5, -5)
-    open var lowTouchEdgeInsets = UIEdgeInsets(top: -5, left: -5, bottom: -5, right: -5)
+    @objc open var lowTouchEdgeInsets = UIEdgeInsets(top: -5, left: -5, bottom: -5, right: -5)
     /// make right thumb easy to touch. Default UIEdgeInsetsMake(-5, -5, -5, -5)
-    open var highTouchEdgeInsets = UIEdgeInsets(top: -5, left: -5, bottom: -5, right: -5)
+    @objc open var highTouchEdgeInsets = UIEdgeInsets(top: -5, left: -5, bottom: -5, right: -5)
 
     /// the imageView of value bar
     private var trackImageView: UIImageView!
@@ -180,41 +175,41 @@ open class AORangeSlider: UIControl {
     private let systemBallLength: CGFloat = 28.0
 
     /// the color of value bar
-    @IBInspectable open var trackColor:UIColor? = #colorLiteral(red: 0, green: 0.4793452024, blue: 0.9990863204, alpha: 1) {
+    @objc @IBInspectable open var trackColor:UIColor? = #colorLiteral(red: 0, green: 0.4793452024, blue: 0.9990863204, alpha: 1) {
         didSet {
             setNeedsLayout()
         }
     }
     /// the image of value bar
-    @IBInspectable open var trackImage:UIImage? {
+    @objc @IBInspectable open var trackImage:UIImage? {
         didSet {
             setNeedsLayout()
         }
     }
     
     /// the color of value bar when crossed
-    @IBInspectable open var trackCrossedColor:UIColor? = .red {
+    @objc @IBInspectable open var trackCrossedColor:UIColor? = .red {
         didSet {
             setNeedsLayout()
         }
     }
 
     /// the image of value bar when crossed
-    @IBInspectable open var trackCrossedImage:UIImage? {
+    @objc @IBInspectable open var trackCrossedImage:UIImage? {
         didSet {
             setNeedsLayout()
         }
     }
     
     /// backgroundImage of the bar, default is a gray 1x2 image
-    @IBInspectable open var trackBackgroundColor: UIColor = .gray {
+    @objc @IBInspectable open var trackBackgroundColor: UIColor = .gray {
         didSet {
             self.trackBackgroundImage = AORangeSlider.getImage(color: self.trackBackgroundColor, size: CGSize(width: 1, height: 2))
         }
     }
     
     /// backgroundImage of the bar, default is a gray 1x2 image
-    @IBInspectable open var trackBackgroundImage: UIImage! {
+    @objc @IBInspectable open var trackBackgroundImage: UIImage! {
         didSet {
             self.trackBackgroundImageView.image = trackBackgroundImage
             
@@ -223,7 +218,7 @@ open class AORangeSlider: UIControl {
     }
 
     /// Default is nil, and use the shadow ball of system
-    @IBInspectable open var lowHandleImageNormal: UIImage? {
+    @objc @IBInspectable open var lowHandleImageNormal: UIImage? {
         didSet {
             if lowHandleImageNormal == nil {
                 becomeSystemBall(ball: lowHandle)
@@ -236,7 +231,7 @@ open class AORangeSlider: UIControl {
     }
 
     /// Default is nil, and use the shadow ball of system
-    @IBInspectable open var highHandleImageNormal: UIImage? {
+    @objc @IBInspectable open var highHandleImageNormal: UIImage? {
         didSet {
             if highHandleImageNormal == nil {
                 becomeSystemBall(ball: highHandle)
@@ -248,8 +243,8 @@ open class AORangeSlider: UIControl {
         }
     }
 
-    open var lowHandleImageHighlighted: UIImage?
-    open var highHandleImageHighlighted: UIImage?
+    @objc open var lowHandleImageHighlighted: UIImage?
+    @objc open var highHandleImageHighlighted: UIImage?
 
     private var trackBackgroundImageView: UIImageView!
 
@@ -261,12 +256,12 @@ open class AORangeSlider: UIControl {
     private var lowTouchOffset = 0.0
     private var highTouchOffset = 0.0
 
-    public override init(frame: CGRect) {
+    @objc public override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    @objc required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configureViews()
     }
@@ -519,7 +514,7 @@ open class AORangeSlider: UIControl {
     // MARK: - class method to create image fast
 
     /// convert view to image
-    open class func getImage(view: UIView) -> UIImage {
+    @objc open class func getImage(view: UIView) -> UIImage {
         UIGraphicsBeginImageContext(view.bounds.size)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let screenShot = UIGraphicsGetImageFromCurrentImageContext()
@@ -528,7 +523,7 @@ open class AORangeSlider: UIControl {
     }
 
     /// create a image with color
-    open class func getImage(color: UIColor, size: CGSize) -> UIImage {
+    @objc open class func getImage(color: UIColor, size: CGSize) -> UIImage {
         let v = UIView()
         v.frame.size = size
         v.backgroundColor = color
