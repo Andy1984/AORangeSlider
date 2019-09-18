@@ -1,33 +1,57 @@
 # AORangeSlider
+
 ![Screenshot gif](https://raw.githubusercontent.com/Andy1984/AORangeSlider/master/Screenshot.gif)
 
 `AORangeSlider` is a custom UISlider with two handler to pick a minimum and maximum range.
 
-# Adding `AORangeSlider` to your project
-CocoaPods
+## Adding `AORangeSlider` to your project
+
 [CocoaPods](http://cocoapods.org) is the recommended way to add `AORangeSlider` to your project.
 Add the following line to your Podfile:
 
 ```ruby
 pod 'AORangeSlider', '~> 1.0'
 ```
+
+## Adding `AORangeSlider` if your project is written in OC
+
+```Objective-c
+#import <AORangeSlider/AORangeSlider-Swift.h>
+```
+
+You can see the .h file. Scroll down and you can see the api.
+
+Alternatively
+
+```Objective-c
+@import AORangeSlider
+```
+
 ## Usage
+
 ```swift
 let rangeSlider = AORangeSlider(frame: frame)
 view.addSubView(rangeSlider)
 ```
-<!-- To observe value changes when using gesture
+
+To observe value changes when using gesture
+
 `rangeSlider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: .valueChanged)`
-is enough, but it cannot observe changes when value being changed programmatically. Thus, `valuesChangedHandler` is a better way. -->
+
+is enough, but it cannot observe changes when value being changed programmatically. Thus, `valuesChangedHandler` is a better way.
+
 If you want to call a method only when touch ends
+
 ```swift
 rangeSlider.changeValueContinuously = false;
 rangeSlider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: .valueChanged)
 ```
+
 else if you want to call a method whenever the value changes, no matter by code or by touch,
+
 ```swift
 rangeSlider.valuesChangedHandler = {
-	//write your code here, and pay attention to Circular Reference.
+    //write your code here, and pay attention to Circular Reference.
 }
 ```
 
