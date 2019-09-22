@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AORangeSlider"
-  s.version      = "1.0.6"
+  s.version      = "1.0.7"
   s.summary      = "Custom UISlider with two handlers to pick a minimum and maximum range."
   s.description  = <<-DESC
   Custom UISlider with two handlers to pick a minimum and maximum range. You can custom your thumb image, background bar height, color, image. You can also set the minimum stepValue of each movement, minimumDistance.
