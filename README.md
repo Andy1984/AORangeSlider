@@ -2,7 +2,7 @@
 
 ![Screenshot gif](https://raw.githubusercontent.com/Andy1984/AORangeSlider/master/Screenshot.gif)
 
-`AORangeSlider` is a custom UISlider with two handler to pick a minimum and maximum range.
+`AORangeSlider` is a custom UISlider with two handlers to pick a minimum and a maximum range.
 
 ## Adding `AORangeSlider` to your project
 
